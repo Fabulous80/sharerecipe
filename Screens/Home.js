@@ -13,7 +13,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { getRecipeByQuery } from "../client.js";
 import SearchModel from "../Components/SearchModel.js";
 import Recipe from "../Components/Recipe.js";
-import { FilterModel } from "../Components/FilterModel.js";
+import FilterModel from "../Components/FilterModel.js";
 
 const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
@@ -28,8 +28,10 @@ export default function Home() {
 
   const [showFilter, setShowFilter] = useState(false);
 
+  console.log(setShowFilter);
+
   useEffect(() => {
-    getRecipeByQuery(query.length === 0 ? "All" : query, 0, 10)
+    getRecipeByQuery(query.length === 0 ? "Mee Goreng" : query, 0, 10)
       .then(({ hits }) => {
         if (!hits) {
           return;
@@ -105,7 +107,8 @@ export default function Home() {
             </>
           )}
         </View>
-        {!showFilter ? (
+
+        {/* {!showFilter ? (
           <TouchableOpacity
             onPress={() => {
               setShowFilter(true);
@@ -145,7 +148,7 @@ export default function Home() {
           </View>
         ) : (
           <Text></Text>
-        )}
+        )} */}
       </View>
     </ScrollView>
   );
