@@ -6,7 +6,7 @@ export default function About() {
     <ScrollView style={styles.container}>
       <View style={styles.subContent}>
         <Text style={styles.head}>App Name</Text>
-        <Text style={styles.text}>Recipe App</Text>
+        <Text style={styles.text}>Find Recipes</Text>
       </View>
       <View style={styles.subContent}>
         <Text style={styles.head}>Version</Text>

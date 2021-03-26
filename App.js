@@ -8,6 +8,7 @@ import Recipe from "./Screens/Recipe.js";
 import About from "./Screens/About.js";
 import FavList from "./Screens/FavList.js";
 import Tab from "./Navigation/Tab.js";
+import Filter from "./Screens/Filter.js";
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
         <Stack.Screen name="Home" component={Tab} />
         <Stack.Screen name="Recipe" component={Recipe} />
         <Stack.Screen name="About" component={About} />
+        <Stack.Screen name="Filter" component={Filter} />
         <Stack.Screen name="FavList" component={FavList} />
       </Stack.Navigator>
     </NavigationContainer>

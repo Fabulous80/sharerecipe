@@ -7,13 +7,19 @@ export default function SearchModel({
   setQuery,
   setRecipes,
   setLoading,
+  setNum,
 }) {
   const handleSearchRecipe = () => {
     setLoading(true);
-    getRecipeByQuery(query.length === 0 ? "All" : query, 0, 10)
+    // console.log(setNum.label);
+    // console.log(typeof setNum.label);
+    getRecipeByQuery(
+      query.length === 0 ? "All" : query,
+      0,
+      parseInt(setNum.label)
+    )
       .then(({ hits }) => {
         if (!hits) {
-          // keytool -genkey -v -keystore hari_recipe_app.keystore -alias hari_recipe_app-keyalg RSA -keysize 2048 -validity 10000
           return;
         }
         setRecipes(hits);
@@ -43,8 +49,8 @@ const styles = StyleSheet.create({
   searchSection: {
     flexDirection: "row",
     backgroundColor: "#fff",
-    marginHorizontal: 20,
-    marginVertical: 10,
+    marginHorizontal: 5,
+    marginVertical: 20,
     borderRadius: 40,
     alignItems: "center",
   },

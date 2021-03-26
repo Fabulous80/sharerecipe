@@ -5,6 +5,7 @@ import { Image, StyleSheet, Text } from "react-native";
 import Recipe from "../Screens/Recipe.js";
 import FavList from "../Screens/FavList.js";
 import About from "../Screens/About.js";
+import Filter from "../Screens/Filter.js";
 
 const Tabs = createBottomTabNavigator();
 

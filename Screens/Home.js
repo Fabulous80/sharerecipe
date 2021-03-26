@@ -7,6 +7,7 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
+  Image,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -14,6 +15,16 @@ import { getRecipeByQuery } from "../client.js";
 import SearchModel from "../Components/SearchModel.js";
 import Recipe from "../Components/Recipe.js";
 import FilterModel from "../Components/FilterModel.js";
+import RadioButtonRN from "radio-buttons-react-native";
+
+const data = [
+  {
+    label: "20 Recipes",
+  },
+  {
+    label: "30 Recipes",
+  },
+];
 
 const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
@@ -25,11 +36,11 @@ export default function Home() {
   const [calories, setCalories] = useState(1500);
   const [health, setHealth] = useState("balanced");
   const [to, setTo] = useState(10);
+  const [num, setNum] = useState();
 
   const [showFilter, setShowFilter] = useState(false);
 
-  console.log(setShowFilter);
-
+  // default to load recipe for "Mee Goreng"
   useEffect(() => {
     getRecipeByQuery(query.length === 0 ? "Mee Goreng" : query, 0, 10)
       .then(({ hits }) => {
@@ -45,14 +56,31 @@ export default function Home() {
   return (
     <ScrollView>
       <View style={styles.container}>
+        <Image
+          source={require("../assets/icons/FR.png")}
+          style={{
+            alignContent: "center",
+            width: 280,
+            height: 70,
+          }}
+        />
         <SearchModel
           query={query}
           setQuery={setQuery}
           setLoading={setLoading}
           setRecipes={setRecipes}
+          setNum={num}
         />
+
+        <RadioButtonRN
+          circleSize={10}
+          box={false}
+          data={data}
+          selectedBtn={(e) => setNum(e)}
+        />
+
         <View style={[styles.contentContainer]}>
-          <Text style={[styles.title]}>Recipes</Text>
+          {/* <Text style={[styles.title]}>Recipes</Text> */}
           {loading ? (
             <View style={{ height: height / 1.7, justifyContent: "center" }}>
               <Text
@@ -108,7 +136,7 @@ export default function Home() {
           )}
         </View>
 
-        {/* {!showFilter ? (
+        {!showFilter ? (
           <TouchableOpacity
             onPress={() => {
               setShowFilter(true);
@@ -120,17 +148,17 @@ export default function Home() {
               style={{
                 color: "white",
                 fontWeight: "bold",
-                fontSize: 17,
+                fontSize: 15,
                 marginLeft: 10,
               }}
             >
-              Filter
+              Search Options
             </Text>
           </TouchableOpacity>
         ) : (
-          <Text></Text>
+          <Text>Feature Coming soon ..</Text>
         )}
-        {showFilter ? (
+        {/* {showFilter ? (
           <View style={styles.modelFilter}>
             <FilterModel
               setRecipes={setRecipes}
@@ -163,6 +191,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     justifyContent: "center",
+    flexDirection: "row",
   },
   title: {
     fontWeight: "bold",
@@ -173,9 +202,9 @@ const styles = StyleSheet.create({
   filter: {
     backgroundColor: "#2DC268",
     flexDirection: "row",
-    width: 120,
+    width: 200,
     marginLeft: 12,
-    paddingVertical: 10,
+    paddingVertical: 5,
     paddingHorizontal: 15,
     zIndex: 1,
     justifyContent: "center",
